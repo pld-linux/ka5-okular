@@ -16,7 +16,8 @@ BuildRequires:	ebook-tools-devel
 BuildRequires:	exiv2-devel
 BuildRequires:	freetype-devel
 BuildRequires:	gettext-tools
-BuildRequires:	ka5-libkexiv2-devel
+# # unreleased/only in git
+#BuildRequires: kf5-kexiv2-devel
 BuildRequires:	kp5-libkscreen-devel
 BuildRequires:	libjpeg-turbo-devel
 BuildRequires:	libspectre-devel
