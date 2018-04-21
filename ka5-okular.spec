@@ -1,14 +1,14 @@
-%define		kdeappsver	17.08.2
+%define		kdeappsver	18.04.0
 %define		qtver		5.3.2
 %define		kaname		okular
 Summary:	KDE universal document viewer
 Name:		ka5-%{kaname}
-Version:	17.08.2
+Version:	18.04.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	f9b4938bc282f146b996275c00b62c69
+# Source0-md5:	75791c1121f993b7dcd0d1846093198f
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	chmlib-devel
@@ -79,8 +79,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 /etc/xdg/okular.categories
 %attr(755,root,root) %{_bindir}/okular
-%ghost %attr(755,root,root) %{_libdir}/libOkular5Core.so.7
-%attr(755,root,root) %{_libdir}/libOkular5Core.so.7.*.*
+%ghost %attr(755,root,root) %{_libdir}/libOkular5Core.so.9
+%attr(755,root,root) %{_libdir}/libOkular5Core.so.9.*.*
 %attr(755,root,root) %{_libdir}/qt5/plugins/kio_msits.so
 %dir %{_libdir}/qt5/plugins/okular
 %dir %{_libdir}/qt5/plugins/okular/generators
@@ -251,6 +251,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/okular/pics/tool-note.png
 %{_datadir}/okular/pics/uparrow.png
 %{_datadir}/okular/pics/upleftarrow.png
+%{_datadir}/okular/pics/tool-base-okular@2x.png
+%{_datadir}/okular/pics/tool-highlighter-okular-colorizable@2x.png
+%{_datadir}/okular/pics/tool-ink-okular-colorizable@2x.png
+%{_datadir}/okular/pics/tool-note-inline-okular-colorizable@2x.png
+%{_datadir}/okular/pics/tool-note-okular-colorizable@2x.png
 %{_datadir}/okular/tools.xml
 
 %files devel
