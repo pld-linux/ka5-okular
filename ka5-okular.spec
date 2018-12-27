@@ -1,14 +1,14 @@
-%define		kdeappsver	18.04.0
-%define		qtver		5.3.2
+%define		kdeappsver	18.12.0
+%define		qtver		5.9.0
 %define		kaname		okular
 Summary:	KDE universal document viewer
 Name:		ka5-%{kaname}
-Version:	18.04.0
+Version:	18.12.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	75791c1121f993b7dcd0d1846093198f
+# Source0-md5:	fc356a501f08cc3c83fd685faf9a18c7
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	chmlib-devel
@@ -18,8 +18,7 @@ BuildRequires:	ebook-tools-devel
 BuildRequires:	exiv2-devel
 BuildRequires:	freetype-devel
 BuildRequires:	gettext-tools
-# # unreleased/only in git
-#BuildRequires: kf5-kexiv2-devel
+BuildRequires:	ka5-libkexiv2-devel
 BuildRequires:	kf5-khtml-devel
 BuildRequires:	kp5-libkscreen-devel
 BuildRequires:	libjpeg-devel
@@ -37,7 +36,14 @@ BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-KDE universal document viewer.
+Okular is a universal document viewer.
+
+Features
+
+• Several Supported Formats: PDF, PS, Tiff, CHM, DjVu, Images, DVI,
+  XPS, ODT, Fiction Book, Comic Book, Plucker, EPub, Fax
+• Thumbnails sidebar
+• Annotations support
 
 %package devel
 Summary:	Header files for %{kaname} development
@@ -79,6 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 /etc/xdg/okular.categories
 %attr(755,root,root) %{_bindir}/okular
+%attr(755,root,root) %{_bindir}/okularkirigami
 %ghost %attr(755,root,root) %{_libdir}/libOkular5Core.so.9
 %attr(755,root,root) %{_libdir}/libOkular5Core.so.9.*.*
 %attr(755,root,root) %{_libdir}/qt5/plugins/kio_msits.so
@@ -92,6 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_fax.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_fb.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_ghostview.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_kimgio.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_ooo.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_plucker.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_poppler.so
@@ -105,6 +113,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/qt5/qml/org/kde/okular/private
 %{_libdir}/qt5/qml/org/kde/okular/private/PageView.qml
 %{_libdir}/qt5/qml/org/kde/okular/qmldir
+%{_desktopdir}/okularApplication_kimgio.desktop
+%{_desktopdir}/org.kde.mobile.okular_kimgio.desktop
+%{_desktopdir}/org.kde.okular.kirigami.desktop
 %{_desktopdir}/okularApplication_chm.desktop
 %{_desktopdir}/okularApplication_comicbook.desktop
 %{_desktopdir}/okularApplication_djvu.desktop
@@ -119,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/okularApplication_tiff.desktop
 %{_desktopdir}/okularApplication_txt.desktop
 %{_desktopdir}/okularApplication_xps.desktop
-%{_desktopdir}/org.kde.mobile.okular.desktop
+#%%{_desktopdir}/org.kde.mobile.okular.desktop
 %{_desktopdir}/org.kde.mobile.okular_chm.desktop
 %{_desktopdir}/org.kde.mobile.okular_comicbook.desktop
 %{_desktopdir}/org.kde.mobile.okular_djvu.desktop
@@ -146,19 +157,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/48x48/apps/okular.png
 %{_iconsdir}/hicolor/64x64/apps/okular.png
 %{_datadir}/kconf_update/okular.upd
-%dir %{_datadir}/kpackage/genericqml/org.kde.mobile.okular
-%dir %{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents
-%dir %{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui
-%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/Bookmarks.qml
-%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/Documents.qml
-%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/MainView.qml
-%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/OkularDrawer.qml
-%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/TableOfContents.qml
-%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/Thumbnails.qml
-%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/ThumbnailsBase.qml
-%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/TreeDelegate.qml
-%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/main.qml
-%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/metadata.desktop
+#%%dir %{_datadir}/kpackage/genericqml/org.kde.mobile.okular
+#%%dir %{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents
+#%%dir %{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui
+#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/Bookmarks.qml
+#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/Documents.qml
+#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/MainView.qml
+#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/OkularDrawer.qml
+#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/TableOfContents.qml
+#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/Thumbnails.qml
+#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/ThumbnailsBase.qml
+#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/TreeDelegate.qml
+#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/main.qml
+#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/metadata.desktop
 %{_datadir}/kservices5/ms-its.protocol
 %{_datadir}/kservices5/okularChm.desktop
 %{_datadir}/kservices5/okularComicbook.desktop
@@ -257,6 +268,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/okular/pics/tool-note-inline-okular-colorizable@2x.png
 %{_datadir}/okular/pics/tool-note-okular-colorizable@2x.png
 %{_datadir}/okular/tools.xml
+%{_datadir}/kservices5/okularKimgio.desktop
+%{_datadir}/metainfo/org.kde.okular-kimgio.metainfo.xml
+%{_datadir}/metainfo/org.kde.okular.kirigami.appdata.xml
+%{_datadir}/okular/pics/tool-typewriter-okular-colorizable.png
+%{_datadir}/okular/pics/tool-typewriter-okular-colorizable@2x.png
 
 %files devel
 %defattr(644,root,root,755)
