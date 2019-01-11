@@ -1,14 +1,14 @@
-%define		kdeappsver	18.12.0
+%define		kdeappsver	18.12.1
 %define		qtver		5.9.0
 %define		kaname		okular
 Summary:	KDE universal document viewer
 Name:		ka5-%{kaname}
-Version:	18.12.0
+Version:	18.12.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	fc356a501f08cc3c83fd685faf9a18c7
+# Source0-md5:	1f9f574ad214194e068a01b943ab03f5
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	chmlib-devel
@@ -41,9 +41,8 @@ Okular is a universal document viewer.
 Features
 
 • Several Supported Formats: PDF, PS, Tiff, CHM, DjVu, Images, DVI,
-  XPS, ODT, Fiction Book, Comic Book, Plucker, EPub, Fax
-• Thumbnails sidebar
-• Annotations support
+XPS, ODT, Fiction Book, Comic Book, Plucker, EPub, Fax • Thumbnails
+sidebar • Annotations support
 
 %package devel
 Summary:	Header files for %{kaname} development
@@ -273,6 +272,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/metainfo/org.kde.okular.kirigami.appdata.xml
 %{_datadir}/okular/pics/tool-typewriter-okular-colorizable.png
 %{_datadir}/okular/pics/tool-typewriter-okular-colorizable@2x.png
+%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_mobi.so
+%{_desktopdir}/okularApplication_mobi.desktop
+%{_desktopdir}/org.kde.mobile.okular_mobi.desktop
+%{_datadir}/kservices5/okularMobi.desktop
+%{_datadir}/metainfo/org.kde.okular-mobipocket.metainfo.xml
 
 %files devel
 %defattr(644,root,root,755)
