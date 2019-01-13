@@ -24,6 +24,7 @@ BuildRequires:	kp5-libkscreen-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libspectre-devel
 BuildRequires:	libtiff-devel
+BuildRequires:	ninja
 BuildRequires:	poppler-qt5-devel
 BuildRequires:	qca-devel
 BuildRequires:	qca-qt5-devel
@@ -63,14 +64,15 @@ Pliki nagłówkowe dla programistów używających %{kaname}.
 install -d build
 cd build
 %cmake \
+	-G Ninja \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+	-DKDE_INSTALL_DOCBUNDLEDIR=%{_kdedocdir} \
 	..
-%{__make}
+%ninja_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} -C build install \
-	DESTDIR=$RPM_BUILD_ROOT
+%ninja_install -C build
 
 %find_lang %{kaname} --all-name --with-kde
 
