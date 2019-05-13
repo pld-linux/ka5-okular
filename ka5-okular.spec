@@ -1,14 +1,15 @@
-%define		kdeappsver	18.12.1
+%define		kdeappsver	19.04.1
+%define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		okular
 Summary:	KDE universal document viewer
 Name:		ka5-%{kaname}
-Version:	18.12.1
+Version:	19.04.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	1f9f574ad214194e068a01b943ab03f5
+# Source0-md5:	d0105dfc61ddac2e0defc22559adf1ae
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	chmlib-devel
@@ -18,10 +19,11 @@ BuildRequires:	ebook-tools-devel
 BuildRequires:	exiv2-devel
 BuildRequires:	freetype-devel
 BuildRequires:	gettext-tools
-BuildRequires:	ka5-libkexiv2-devel
-BuildRequires:	kf5-khtml-devel
+BuildRequires:	ka5-libkexiv2-devel >= %{version}
+BuildRequires:	kf5-khtml-devel >= %{kframever}
 BuildRequires:	kp5-libkscreen-devel
 BuildRequires:	libjpeg-devel
+BuildRequires:	libmarkdown-devel
 BuildRequires:	libspectre-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	ninja
@@ -66,7 +68,7 @@ cd build
 %cmake \
 	-G Ninja \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-	-DKDE_INSTALL_DOCBUNDLEDIR=%{_kdedocdir} \
+	-DHTML_INSTALL_DIR=%{_kdedocdir} \
 	..
 %ninja_build
 
@@ -101,6 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_fb.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_ghostview.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_kimgio.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_md.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_ooo.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_plucker.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_poppler.so
@@ -125,13 +128,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/okularApplication_fax.desktop
 %{_desktopdir}/okularApplication_fb.desktop
 %{_desktopdir}/okularApplication_ghostview.desktop
+%{_desktopdir}/okularApplication_md.desktop
 %{_desktopdir}/okularApplication_ooo.desktop
 %{_desktopdir}/okularApplication_pdf.desktop
 %{_desktopdir}/okularApplication_plucker.desktop
 %{_desktopdir}/okularApplication_tiff.desktop
 %{_desktopdir}/okularApplication_txt.desktop
 %{_desktopdir}/okularApplication_xps.desktop
-#%%{_desktopdir}/org.kde.mobile.okular.desktop
 %{_desktopdir}/org.kde.mobile.okular_chm.desktop
 %{_desktopdir}/org.kde.mobile.okular_comicbook.desktop
 %{_desktopdir}/org.kde.mobile.okular_djvu.desktop
@@ -140,6 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/org.kde.mobile.okular_fax.desktop
 %{_desktopdir}/org.kde.mobile.okular_fb.desktop
 %{_desktopdir}/org.kde.mobile.okular_ghostview.desktop
+%{_desktopdir}/org.kde.mobile.okular_md.desktop
 %{_desktopdir}/org.kde.mobile.okular_ooo.desktop
 %{_desktopdir}/org.kde.mobile.okular_pdf.desktop
 %{_desktopdir}/org.kde.mobile.okular_plucker.desktop
@@ -158,19 +162,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/48x48/apps/okular.png
 %{_iconsdir}/hicolor/64x64/apps/okular.png
 %{_datadir}/kconf_update/okular.upd
-#%%dir %{_datadir}/kpackage/genericqml/org.kde.mobile.okular
-#%%dir %{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents
-#%%dir %{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui
-#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/Bookmarks.qml
-#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/Documents.qml
-#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/MainView.qml
-#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/OkularDrawer.qml
-#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/TableOfContents.qml
-#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/Thumbnails.qml
-#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/ThumbnailsBase.qml
-#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/TreeDelegate.qml
-#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/contents/ui/main.qml
-#%%{_datadir}/kpackage/genericqml/org.kde.mobile.okular/metadata.desktop
 %{_datadir}/kservices5/ms-its.protocol
 %{_datadir}/kservices5/okularChm.desktop
 %{_datadir}/kservices5/okularComicbook.desktop
@@ -180,6 +171,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kservices5/okularFax.desktop
 %{_datadir}/kservices5/okularFb.desktop
 %{_datadir}/kservices5/okularGhostview.desktop
+%{_datadir}/kservices5/okularMd.desktop
 %{_datadir}/kservices5/okularOoo.desktop
 %{_datadir}/kservices5/okularPlucker.desktop
 %{_datadir}/kservices5/okularPoppler.desktop
@@ -212,6 +204,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/metainfo/org.kde.okular-epub.metainfo.xml
 %{_datadir}/metainfo/org.kde.okular-fax.metainfo.xml
 %{_datadir}/metainfo/org.kde.okular-fb.metainfo.xml
+%{_datadir}/metainfo/org.kde.okular-md.metainfo.xml
 %{_datadir}/metainfo/org.kde.okular-ooo.metainfo.xml
 %{_datadir}/metainfo/org.kde.okular-plucker.metainfo.xml
 %{_datadir}/metainfo/org.kde.okular-poppler.metainfo.xml
