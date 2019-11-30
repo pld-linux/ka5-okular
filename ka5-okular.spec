@@ -19,6 +19,7 @@ BuildRequires:	ebook-tools-devel
 BuildRequires:	exiv2-devel
 BuildRequires:	freetype-devel
 BuildRequires:	gettext-tools
+BuildRequires:	ka5-kdegraphics-mobipocket-devel >= %{version}
 BuildRequires:	ka5-libkexiv2-devel >= %{version}
 BuildRequires:	kf5-kactivities-devel >= %{kframever}
 BuildRequires:	kf5-khtml-devel >= %{kframever}
@@ -31,6 +32,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libmarkdown-devel
 BuildRequires:	libspectre-devel
 BuildRequires:	libtiff-devel
+BuildRequires:	libzip-devel
 BuildRequires:	ninja
 BuildRequires:	poppler-qt5-devel
 BuildRequires:	qca-devel
