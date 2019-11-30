@@ -20,7 +20,12 @@ BuildRequires:	exiv2-devel
 BuildRequires:	freetype-devel
 BuildRequires:	gettext-tools
 BuildRequires:	ka5-libkexiv2-devel >= %{version}
+BuildRequires:	kf5-kactivities-devel >= %{kframever}
 BuildRequires:	kf5-khtml-devel >= %{kframever}
+BuildRequires:	kf5-kirigami2-devel >= %{kframever}
+BuildRequires:	kf5-kpty-devel >= %{kframever}
+BuildRequires:	kf5-purpose-devel >= %{kframever}
+BuildRequires:	kf5-threadweaver-devel >= %{kframever}
 BuildRequires:	kp5-libkscreen-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmarkdown-devel
