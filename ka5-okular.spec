@@ -1,15 +1,15 @@
-%define		kdeappsver	20.12.3
+%define		kdeappsver	21.04.0
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		okular
 Summary:	KDE universal document viewer
 Name:		ka5-%{kaname}
-Version:	20.12.3
+Version:	21.04.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	c9a38d7cf083baba8352c4a8ba3a827b
+# Source0-md5:	aa7260db965aed92c70cfb1fe3005e56
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	chmlib-devel
@@ -29,7 +29,7 @@ BuildRequires:	kf5-purpose-devel >= %{kframever}
 BuildRequires:	kf5-threadweaver-devel >= %{kframever}
 BuildRequires:	kp5-libkscreen-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	libmarkdown-devel
+BuildRequires:	libmarkdown-devel >= 2.2.6
 BuildRequires:	libspectre-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libzip-devel
@@ -92,8 +92,8 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/okular
-%ghost %attr(755,root,root) %{_libdir}/libOkular5Core.so.9
-%attr(755,root,root) %{_libdir}/libOkular5Core.so.9.*.*
+%ghost %{_libdir}/libOkular5Core.so.9
+%attr(755,root,root) %{_libdir}/libOkular5Core.so.*.*.*
 %attr(755,root,root) %{_libdir}/qt5/plugins/kio_msits.so
 %dir %{_libdir}/qt5/plugins/okular
 %dir %{_libdir}/qt5/plugins/okular/generators
@@ -267,6 +267,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libOkular5Core.so
+%{_libdir}/libOkular5Core.so
 %{_libdir}/cmake/Okular5
 %{_includedir}/okular
