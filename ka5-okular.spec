@@ -52,6 +52,15 @@ Features
 XPS, ODT, Fiction Book, Comic Book, Plucker, EPub, Fax • Thumbnails
 sidebar • Annotations support
 
+%description -l pl.UTF-8
+Okular to uniwersalna przeglądarka dokumentów.
+
+Właściwości
+
+• Wiele wspieranych formatów: PDF, PS, Tiff, CHM, DjVu, Images, DVI,
+XPS, ODT, Fiction Book, Comic Book, Plucker, EPub, Fax • Panel boczny
+z miniaturkami • Wsparcie dla adnotacji
+
 %package devel
 Summary:	Header files for %{kaname} development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kaname}
