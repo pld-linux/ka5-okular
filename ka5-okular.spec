@@ -1,15 +1,15 @@
-%define		kdeappsver	21.04.3
+%define		kdeappsver	21.08.0
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		okular
 Summary:	KDE universal document viewer
 Name:		ka5-%{kaname}
-Version:	21.04.3
+Version:	21.08.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	f14c35360d701719959d720c19ec1ef8
+# Source0-md5:	6e1244b7145c0f7e22442bfd47777193
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	chmlib-devel
@@ -103,7 +103,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/okular
 %ghost %{_libdir}/libOkular5Core.so.9
 %attr(755,root,root) %{_libdir}/libOkular5Core.so.*.*.*
-%attr(755,root,root) %{_libdir}/qt5/plugins/kio_msits.so
 %dir %{_libdir}/qt5/plugins/okular
 %dir %{_libdir}/qt5/plugins/okular/generators
 %attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_chmlib.so
@@ -164,7 +163,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/48x48/apps/okular.png
 %{_iconsdir}/hicolor/64x64/apps/okular.png
 %{_datadir}/kconf_update/okular.upd
-%{_datadir}/kservices5/ms-its.protocol
 %{_datadir}/kservices5/okularChm.desktop
 %{_datadir}/kservices5/okularComicbook.desktop
 %{_datadir}/kservices5/okularDjvu.desktop
@@ -273,6 +271,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kservices5/okularMobi.desktop
 %{_datadir}/metainfo/org.kde.okular-mobipocket.metainfo.xml
 %{_datadir}/qlogging-categories5/okular.categories
+%{_libdir}/qt5/plugins/kf5/kio/kio_msits.so
 
 %files devel
 %defattr(644,root,root,755)
