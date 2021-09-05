@@ -1,15 +1,15 @@
-%define		kdeappsver	21.08.0
+%define		kdeappsver	21.08.1
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		okular
 Summary:	KDE universal document viewer
 Name:		ka5-%{kaname}
-Version:	21.08.0
+Version:	21.08.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	6e1244b7145c0f7e22442bfd47777193
+# Source0-md5:	2e7003e7c9363ad64873153161a77c58
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	chmlib-devel
