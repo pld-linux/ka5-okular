@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	21.12.3
+%define		kdeappsver	22.04.0
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		okular
 Summary:	KDE universal document viewer
 Name:		ka5-%{kaname}
-Version:	21.12.3
+Version:	22.04.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	1d0c82d6b4709db354108c3907673f70
+# Source0-md5:	41d746c79573e8937fdb66eace709820
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	chmlib-devel
@@ -110,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/okular
-%ghost %{_libdir}/libOkular5Core.so.9
+%ghost %{_libdir}/libOkular5Core.so.10
 %attr(755,root,root) %{_libdir}/libOkular5Core.so.*.*.*
 %dir %{_libdir}/qt5/plugins/okular
 %dir %{_libdir}/qt5/plugins/okular/generators
