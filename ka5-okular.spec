@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	22.12.0
+%define		kdeappsver	22.12.1
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		okular
 Summary:	KDE universal document viewer
 Name:		ka5-%{kaname}
-Version:	22.12.0
-Release:	4
+Version:	22.12.1
+Release:	1
 License:	GPL v2+/LGPL v2.1+
-Group:		X11/Libraries
+Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	cd90ed6613e3e08c06a383580b6b7a5d
+# Source0-md5:	270002e8747523a2d5d3bca8196795cc
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	chmlib-devel
@@ -44,6 +44,7 @@ BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	zlib-devel
+Requires:	%{name}-data = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -63,6 +64,18 @@ Właściwości
 • Wiele wspieranych formatów: PDF, PS, Tiff, CHM, DjVu, Images, DVI,
 XPS, ODT, Fiction Book, Comic Book, Plucker, EPub, Fax • Panel boczny
 z miniaturkami • Wsparcie dla adnotacji
+
+%package data
+Summary:	Data files for %{kaname}
+Summary(pl.UTF-8):	Dane dla %{kaname}
+Group:		X11/Applications
+BuildArch:	noarch
+
+%description data
+Data files for %{kaname}.
+
+%description data -l pl.UTF-8
+Dane dla %{kaname}.
 
 %package devel
 Summary:	Header files for %{kaname} development
@@ -110,29 +123,34 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files -f %{kaname}.lang
+%files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/okular
 %ghost %{_libdir}/libOkular5Core.so.10
 %attr(755,root,root) %{_libdir}/libOkular5Core.so.*.*.*
 %dir %{_libdir}/qt5/plugins/okular
 %dir %{_libdir}/qt5/plugins/okular/generators
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_chmlib.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_comicbook.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_djvu.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_dvi.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_epub.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_fax.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_fb.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_ghostview.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_kimgio.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_md.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_plucker.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_poppler.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_tiff.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_txt.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_xps.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/okularpart.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_chmlib.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_comicbook.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_djvu.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_dvi.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_epub.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_fax.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_fb.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_ghostview.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_kimgio.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_md.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_plucker.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_poppler.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_tiff.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_txt.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_xps.so
+%{_libdir}/qt5/plugins/okularpart.so
+%{_libdir}/qt5/plugins/okular/generators/okularGenerator_mobi.so
+%{_libdir}/qt5/plugins/kf5/kio/kio_msits.so
+
+%files data -f %{kaname}.lang
+%defattr(644,root,root,755)
 %{_desktopdir}/okularApplication_kimgio.desktop
 %{_desktopdir}/org.kde.mobile.okular_kimgio.desktop
 %{_desktopdir}/okularApplication_chm.desktop
@@ -277,13 +295,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/metainfo/org.kde.okular-kimgio.metainfo.xml
 %{_datadir}/okular/pics/tool-typewriter-okular-colorizable.png
 %{_datadir}/okular/pics/tool-typewriter-okular-colorizable@2x.png
-%attr(755,root,root) %{_libdir}/qt5/plugins/okular/generators/okularGenerator_mobi.so
 %{_desktopdir}/okularApplication_mobi.desktop
 %{_desktopdir}/org.kde.mobile.okular_mobi.desktop
 %{_datadir}/kservices5/okularMobi.desktop
 %{_datadir}/metainfo/org.kde.okular-mobipocket.metainfo.xml
 %{_datadir}/qlogging-categories5/okular.categories
-%{_libdir}/qt5/plugins/kf5/kio/kio_msits.so
 
 %files devel
 %defattr(644,root,root,755)
