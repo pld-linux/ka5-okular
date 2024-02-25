@@ -1,20 +1,20 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	23.08.4
+%define		kdeappsver	24.01.95
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		okular
 Summary:	KDE universal document viewer
 Name:		ka5-%{kaname}
-Version:	23.08.4
-Release:	1
+Version:	24.01.95
+Release:	0.1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
-Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	c0920c6d590f17b9520e471b1508f867
+Source0:	https://download.kde.org/unstable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+# Source0-md5:	afebfbe0ebfa6baee5da5b5f0b4b9df2
 URL:		http://www.kde.org/
-BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	chmlib-devel
 BuildRequires:	cmake >= 3.20
 BuildRequires:	djvulibre-devel
@@ -24,22 +24,21 @@ BuildRequires:	freetype-devel
 BuildRequires:	gettext-tools
 BuildRequires:	ka5-kdegraphics-mobipocket-devel >= %{version}
 BuildRequires:	ka5-libkexiv2-devel >= %{version}
-BuildRequires:	kf5-kactivities-devel >= %{kframever}
-BuildRequires:	kf5-khtml-devel >= %{kframever}
-BuildRequires:	kf5-kirigami2-devel >= %{kframever}
-BuildRequires:	kf5-kpty-devel >= %{kframever}
-BuildRequires:	kf5-purpose-devel >= %{kframever}
-BuildRequires:	kf5-threadweaver-devel >= %{kframever}
+BuildRequires:	kf6-kirigami-devel >= %{kframever}
+BuildRequires:	kf6-kpty-devel >= %{kframever}
+BuildRequires:	kf6-purpose-devel >= %{kframever}
+BuildRequires:	kf6-threadweaver-devel >= %{kframever}
 BuildRequires:	kp5-libkscreen-devel
+BuildRequires:	kp5-plasma-activities-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmarkdown-devel >= 2.2.6
 BuildRequires:	libspectre-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libzip-devel
 BuildRequires:	ninja
-BuildRequires:	poppler-qt5-devel
-BuildRequires:	qca-qt5-devel
-BuildRequires:	qt5-build >= %{qtver}
+BuildRequires:	poppler-qt6-devel
+BuildRequires:	qca-qt6-devel
+BuildRequires:	qt6-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -124,34 +123,30 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/okular
-%ghost %{_libdir}/libOkular5Core.so.1?
-%attr(755,root,root) %{_libdir}/libOkular5Core.so.*.*.*
-%dir %{_libdir}/qt5/plugins/okular
-%dir %{_libdir}/qt5/plugins/okular/generators
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_chmlib.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_comicbook.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_djvu.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_dvi.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_epub.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_fax.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_fb.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_ghostview.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_kimgio.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_md.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_plucker.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_poppler.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_tiff.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_txt.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_xps.so
-%{_libdir}/qt5/plugins/okularpart.so
-%{_libdir}/qt5/plugins/okular/generators/okularGenerator_mobi.so
-%{_libdir}/qt5/plugins/kf5/kio/kio_msits.so
+%ghost %{_libdir}/libOkular6Core.so.1
+%attr(755,root,root) %{_libdir}/libOkular6Core.so.*.*
+%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/parts/okularpart.so
+%dir %{_libdir}/qt6/plugins/okular_generators
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_comicbook.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_djvu.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_dvi.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_epub.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_fax.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_fb.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_ghostview.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_kimgio.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_md.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_mobi.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_plucker.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_poppler.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_tiff.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_txt.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/okular_generators/okularGenerator_xps.so
 
 %files data -f %{kaname}.lang
 %defattr(644,root,root,755)
 %{_desktopdir}/okularApplication_kimgio.desktop
 %{_desktopdir}/org.kde.mobile.okular_kimgio.desktop
-%{_desktopdir}/okularApplication_chm.desktop
 %{_desktopdir}/okularApplication_comicbook.desktop
 %{_desktopdir}/okularApplication_djvu.desktop
 %{_desktopdir}/okularApplication_dvi.desktop
@@ -165,7 +160,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/okularApplication_tiff.desktop
 %{_desktopdir}/okularApplication_txt.desktop
 %{_desktopdir}/okularApplication_xps.desktop
-%{_desktopdir}/org.kde.mobile.okular_chm.desktop
 %{_desktopdir}/org.kde.mobile.okular_comicbook.desktop
 %{_desktopdir}/org.kde.mobile.okular_djvu.desktop
 %{_desktopdir}/org.kde.mobile.okular_dvi.desktop
@@ -184,33 +178,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/config.kcfg/okular.kcfg
 %{_datadir}/config.kcfg/okular_core.kcfg
 %{_datadir}/config.kcfg/pdfsettings.kcfg
-%{_iconsdir}/hicolor/128x128/apps/okular.png
-%{_iconsdir}/hicolor/16x16/apps/okular.png
-%{_iconsdir}/hicolor/22x22/apps/okular.png
-%{_iconsdir}/hicolor/32x32/apps/okular.png
-%{_iconsdir}/hicolor/48x48/apps/okular.png
-%{_iconsdir}/hicolor/64x64/apps/okular.png
+%{_iconsdir}/hicolor/*x*/apps/okular.png
 %{_datadir}/kconf_update/okular.upd
-%{_datadir}/kservices5/okularChm.desktop
-%{_datadir}/kservices5/okularComicbook.desktop
-%{_datadir}/kservices5/okularDjvu.desktop
-%{_datadir}/kservices5/okularDvi.desktop
-%{_datadir}/kservices5/okularEPub.desktop
-%{_datadir}/kservices5/okularFax.desktop
-%{_datadir}/kservices5/okularFb.desktop
-%{_datadir}/kservices5/okularGhostview.desktop
-%{_datadir}/kservices5/okularMd.desktop
-%{_datadir}/kservices5/okularPlucker.desktop
-%{_datadir}/kservices5/okularPoppler.desktop
-%{_datadir}/kservices5/okularTiff.desktop
-%{_datadir}/kservices5/okularTxt.desktop
-%{_datadir}/kservices5/okularXps.desktop
-%{_datadir}/kservices5/okular_part.desktop
-%{_datadir}/kservicetypes5/okularGenerator.desktop
-%dir %{_datadir}/kxmlgui5/okular
-%{_datadir}/kxmlgui5/okular/part-viewermode.rc
-%{_datadir}/kxmlgui5/okular/part.rc
-%{_datadir}/kxmlgui5/okular/shell.rc
 %{_mandir}/ca/man1/okular.1*
 %{_mandir}/de/man1/okular.1*
 %{_mandir}/es/man1/okular.1*
@@ -223,8 +192,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/pt_BR/man1/okular.1*
 %{_mandir}/ru/man1/okular.1*
 %{_mandir}/sv/man1/okular.1*
+%{_mandir}/tr/man1/okular.1*
 %{_mandir}/uk/man1/okular.1*
-%{_datadir}/metainfo/org.kde.okular-chm.metainfo.xml
 %{_datadir}/metainfo/org.kde.okular-comicbook.metainfo.xml
 %{_datadir}/metainfo/org.kde.okular-djvu.metainfo.xml
 %{_datadir}/metainfo/org.kde.okular-dvi.metainfo.xml
@@ -239,68 +208,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/metainfo/org.kde.okular-txt.metainfo.xml
 %{_datadir}/metainfo/org.kde.okular-xps.metainfo.xml
 %{_datadir}/metainfo/org.kde.okular.appdata.xml
-%dir %{_datadir}/okular
-%{_datadir}/okular/drawingtools.xml
-%dir %{_datadir}/okular/icons
-%dir %{_datadir}/okular/icons/hicolor
-%dir %{_datadir}/okular/icons/hicolor/16x16
-%dir %{_datadir}/okular/icons/hicolor/16x16/apps
-%{_datadir}/okular/icons/hicolor/16x16/apps/okular-fb2.png
-%{_datadir}/okular/icons/hicolor/16x16/apps/okular-gv.png
-%dir %{_datadir}/okular/icons/hicolor/32x32
-%dir %{_datadir}/okular/icons/hicolor/32x32/apps
-%{_datadir}/okular/icons/hicolor/32x32/apps/okular-fb2.png
-%{_datadir}/okular/icons/hicolor/32x32/apps/okular-gv.png
-%dir %{_datadir}/okular/icons/hicolor/48x48
-%dir %{_datadir}/okular/icons/hicolor/48x48/apps
-%{_datadir}/okular/icons/hicolor/48x48/apps/okular-fb2.png
-%dir %{_datadir}/okular/pics
-%{_datadir}/okular/pics/checkmark.png
-%{_datadir}/okular/pics/circle.png
-%{_datadir}/okular/pics/comment.png
-%{_datadir}/okular/pics/cross.png
-%{_datadir}/okular/pics/help.png
-%{_datadir}/okular/pics/insert.png
-%{_datadir}/okular/pics/key.png
-%{_datadir}/okular/pics/newparagraph.png
-%{_datadir}/okular/pics/note.png
-%{_datadir}/okular/pics/okular-epub-movie.png
-%{_datadir}/okular/pics/okular-epub-sound-icon.png
-%{_datadir}/okular/pics/paperclip.png
-%{_datadir}/okular/pics/paragraph.png
-%{_datadir}/okular/pics/pushpin.png
-%{_datadir}/okular/pics/rightarrow.png
-%{_datadir}/okular/pics/rightpointer.png
-%{_datadir}/okular/pics/stamps.svg
-%{_datadir}/okular/pics/star.png
-%{_datadir}/okular/pics/tool-base-okular.png
-%{_datadir}/okular/pics/tool-highlighter-okular-colorizable.png
-%{_datadir}/okular/pics/tool-ink-okular-colorizable.png
-%{_datadir}/okular/pics/tool-note-inline-okular-colorizable.png
-%{_datadir}/okular/pics/tool-note-inline.png
-%{_datadir}/okular/pics/tool-note-okular-colorizable.png
-%{_datadir}/okular/pics/tool-note.png
-%{_datadir}/okular/pics/uparrow.png
-%{_datadir}/okular/pics/upleftarrow.png
-%{_datadir}/okular/pics/tool-base-okular@2x.png
-%{_datadir}/okular/pics/tool-highlighter-okular-colorizable@2x.png
-%{_datadir}/okular/pics/tool-ink-okular-colorizable@2x.png
-%{_datadir}/okular/pics/tool-note-inline-okular-colorizable@2x.png
-%{_datadir}/okular/pics/tool-note-okular-colorizable@2x.png
-%{_datadir}/okular/tools.xml
-%{_datadir}/okular/toolsQuick.xml
-%{_datadir}/kservices5/okularKimgio.desktop
+%{_datadir}/okular
 %{_datadir}/metainfo/org.kde.okular-kimgio.metainfo.xml
-%{_datadir}/okular/pics/tool-typewriter-okular-colorizable.png
-%{_datadir}/okular/pics/tool-typewriter-okular-colorizable@2x.png
 %{_desktopdir}/okularApplication_mobi.desktop
 %{_desktopdir}/org.kde.mobile.okular_mobi.desktop
-%{_datadir}/kservices5/okularMobi.desktop
 %{_datadir}/metainfo/org.kde.okular-mobipocket.metainfo.xml
-%{_datadir}/qlogging-categories5/okular.categories
+%{_datadir}/qlogging-categories6/okular.categories
 
 %files devel
 %defattr(644,root,root,755)
-%{_libdir}/libOkular5Core.so
-%{_libdir}/cmake/Okular5
 %{_includedir}/okular
+%{_libdir}/cmake/Okular6
+%{_libdir}/libOkular6Core.so
